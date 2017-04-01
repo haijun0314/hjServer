@@ -83,11 +83,6 @@ public class NoteController extends BaseAction{
 			BaseRespBean   r=new BaseRespBean();
 			PageBean      pb=new PageBean(request);
 			BaseReqBean q=new BaseReqBean();
-			if (!q.checkToken(request)) {
-				r.fail(CodeUtil.e_9999);
-				respMsgObj(response, r);
-				return; 
-			}
 			pb.append("customerId", q.getCustomerId());
 			r=noteService.noteList(pb,r);
 			super.respMsgObj(response, r);

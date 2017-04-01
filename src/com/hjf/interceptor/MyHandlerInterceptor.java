@@ -60,7 +60,6 @@ public class MyHandlerInterceptor extends HandlerInterceptorAdapter {
 				return false;
 			}
 			SessionUtil.continueSession(cks[0], session);
-			
 		}
 		return true;
 			

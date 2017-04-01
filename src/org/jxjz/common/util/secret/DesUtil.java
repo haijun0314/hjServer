@@ -91,8 +91,8 @@ public class DesUtil {
     public static void main(String[] args) throws Exception
     {
         String  key="A3F2569D";
-        String encoded = encrypt("20150601141211",key);        
-        System.out.println("加密后的字符串:" + encrypt("20150601141211",key));
+        String encoded = encrypt("123456",key);        
+        System.out.println("加密后的字符串:" + encrypt("123456",key));
         System.out.println("加密后的字符串:" + decrypt("3040b254ce578ea07534d0c632fb6bb8", key));
         
 

@@ -11,7 +11,10 @@
 	<select id="login" parameterType="Customer" resultType="Customer">
 		select * from customer where  telephone=#{telephone}  and password=#{password}
 	</select>	
-	
+	<!-- 用户密码登录   -->
+	<select id="findByTelephone" parameterType="java.lang.String" resultType="Customer">
+		select * from customer where  telephone=#{telephone}  
+	</select>	
 	
 	
 	<!-- 增加 -->

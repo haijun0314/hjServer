@@ -8,11 +8,35 @@ import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import org.apache.commons.lang.StringUtils;
 	
 public class StringUtil {
       
+	
+	
+  
+    /** 
+     * 大陆手机号码11位数，匹配格式：前三位固定格式+后8位任意数 
+     * 此方法中前三位格式有： 
+     * 13+任意数 
+     * 15+除4的任意数 
+     * 18+除1和4的任意数 
+     * 17+除9的任意数 
+     * 147 
+     */  
+    public static boolean isMobilePhone(String str) throws PatternSyntaxException {  
+       String regex = "1(3|5|7|8)[0-9]{9}";
+        Pattern p = Pattern.compile(regex);  
+        Matcher m = p.matcher(str);  
+        return m.matches();  
+    }  
+  
+
+	
+	
+	
 	public static String   createId(String prefix) {
 		if (StringUtils.isNotBlank(prefix)) {
 			return prefix+TimeUtil.getDateYMDHMS()+StringUtil.getRandNum(15);
@@ -309,14 +333,6 @@ public class StringUtil {
 	}
 	
 	/**
-	 * @param str
-	 * @return
-	 */
-	public static boolean isAccountType(String str) {
-		return "1".equals(str) || "2".equals(str) || "3".equals(str);
-	}
-
-	/**
 	 * 
 	 * @param str
 	 * @return
@@ -379,14 +395,6 @@ public class StringUtil {
 		} else
 			return length;
 
-	}
-
-	/**
-	 * @param str
-	 * @return
-	 */
-	public static boolean isCustidentifiertype(String str) {
-		return isAccountType(str);
 	}
 
 	/**
@@ -490,86 +498,8 @@ public class StringUtil {
 	 * @param str
 	 * @return
 	 */
-	public static boolean checkOPType(String str) {
-		return "1".equals(str) || "2".equals(str);
-	}
-
-	/**
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public static boolean checkSmsVerify(String str) {
-		return checkOPType(str);
-	}
-
-	/**
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public static String getYMDHMS(String str) {
-		return "to_char(" + str + ", 'yyyy-mm-dd hh24:mi:ss')";
-	}
-
-	/**
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public static String getYMDHM(String str) {
-		return "to_char(" + str + ", 'yyyy-mm-dd hh24:mi')";
-	}
-
-	/**
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public static String getYMD(String str) {
-		return "to_char(" + str + ", 'yyyy-mm-dd')";
-	}
-	
-	/**
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public static String getDateYMDHMS(String str) {
-		return "to_date(?, 'yyyy-mm-dd hh24:mi:ss')";
-	}
-	
-	/**
-	 * 
-	 * @param str
-	 * @return
-	 */
 	public static String getAlertFlag(String str) {
 		return isEmpty(str) ? "1" : "0";
-	}
-	
-	/**
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public static boolean checkApporderstatus(String str) {
-		if ("0".equals(str) || "1".equals(str)) {
-			return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public static boolean checkApporderstatus2(String str) {
-		if ("0".equals(str) || "1".equals(str) || "2".equals(str)) {
-			return true;
-		}
-		return false;
 	}
 	
 	/**
@@ -592,18 +522,6 @@ public class StringUtil {
 	 */
 	public static boolean isArrayEmpty(Object[] obj) {
 		if (obj == null || obj.length == 0) {
-			return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * 
-	 * @param obj
-	 * @return
-	 */
-	public static boolean isArrayEmptyOr11111(Object[] obj) {
-		if (isArrayEmpty(obj) || "11111".equals(obj[0])) {
 			return true;
 		}
 		return false;
@@ -674,7 +592,7 @@ public class StringUtil {
 	public static void main(String[] args) {
 		
 		
-		 System.out.print("123456".substring("123456".length()-4, "123456".length()));
+		 
 		}
 	
 }

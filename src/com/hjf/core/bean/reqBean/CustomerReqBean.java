@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import com.hjf.core.bean.BaseReqBean;
 
 public class CustomerReqBean extends BaseReqBean {
-	private Logger  log = Logger.getLogger("h"); 
 	private String  customerName; 				//用户名称
 	private String  password;					//账号密码
 	private Integer age;						//年龄
@@ -44,10 +43,7 @@ public class CustomerReqBean extends BaseReqBean {
 		 String  sex			=request.getParameter("sex");					//性别  0  男 1  女
 		 String  gexinCid		=request.getParameter("gexinCid");				//个信账户ID
 		 String  rongToken		=request.getParameter("rongToken");				//融云token
-		
-		if (!checkToken(request)) {
-			return false;
-		}else {
+		 
 			setCustomerName(customerName);
 			setPassword(password);
 			if (StringUtils.isNotBlank(age)) {
@@ -67,7 +63,6 @@ public class CustomerReqBean extends BaseReqBean {
 			setRongToken(rongToken);
 			printParams();
 			return true;
-		} 
 	}
 
 	

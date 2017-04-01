@@ -26,10 +26,11 @@ public class LoginServiceImpl extends BaseService  implements LoginService {
 	 * 【用户登录】
 	 */
 	public LoginRespBean login(LoginReqBean q,LoginRespBean     r ){
+		log.info("登录操作开始....账户"+q.getTelephone());
 		Customer  lo=new Customer();
 		lo.setPassword(q.getPassword());
 		lo.setTelephone(q.getTelephone());
-		Customer c =(Customer) customerDAO.getObjById(lo, "Customer.login");
+		Customer c =(Customer) customerDAO.getObjById(lo, "login");
 		if (c==null) {
 			log.error("【用户登录】...登录失败....没有查询到该账户信息");
 			r.fail(CodeUtil.e_1003);

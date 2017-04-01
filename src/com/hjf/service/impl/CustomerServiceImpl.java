@@ -5,11 +5,8 @@ package com.hjf.service.impl;
  * 作    者：lihaijun
  * 创建日期：2014-11-21
  */
-import java.util.Map;
-
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +22,6 @@ import com.hjf.service.CustomerService;
 @Transactional 
 public class CustomerServiceImpl   extends BaseService implements CustomerService {
 	@Resource CustomerDAO customerDAO;
-	private Logger log = Logger.getLogger("h");
 	
 	/**
 	 * 【查询我的账户信息】
