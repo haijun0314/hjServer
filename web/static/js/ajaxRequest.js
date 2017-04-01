@@ -54,6 +54,7 @@ var AjaxUtils = {
 	loadData: function(url, data, callback) {
 		AjaxUtils.loadding(1);
 		$.post(url, '', function (respData) {
+			alert(JSOn.stringify(respData));
 			AjaxUtils.loadding(0);
 	        if (respData.code == "0000") {
 	        	callback(respData);

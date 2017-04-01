@@ -20,8 +20,7 @@ public class CustomerUtil {
 	 */
 	public static  void createToken(Customer  c) {
 		try {
-			String tokenKey=ConfigUtil.sys_secKey;
-			String token=DesUtil.encrypt(c.getTelephone()+"-"+c.getPassword()+"-"+c.getCustomerId(), tokenKey);
+			String token=DesUtil.encrypt(c.getTelephone()+"-"+c.getCustomerId(), ConfigUtil.sys_secKey);
 			c.setUserToken(token);
 		} catch (Exception e) {
 			log.error("创建登录账户token  失败"+e.getMessage());

@@ -34,7 +34,7 @@ public class CodeUtil {
 	public static String e_1007="1007";//账户已经注册过
 	public static String e_1008="1008";//更新账户信息失败
 	public static String e_1009="1009";//缺失账户信息
-	
+	public static String e_1010="1010";//session  过期
 	 
 	
 	
@@ -57,7 +57,7 @@ public class CodeUtil {
 		codeMap.put("1007", "账户已经注册过");
 		codeMap.put("1008", "更新账户信息失败");
 		codeMap.put("1009", "缺失账户信息");
-		
+		codeMap.put("1010", "session过期");
 	}
 	
 	
