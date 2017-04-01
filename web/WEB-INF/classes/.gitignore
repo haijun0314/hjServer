@@ -1,2 +1,6 @@
+/application.properties
 /com/
+/mybatis-config.xml
 /org/
+/test/
+/MyOgnl.class
