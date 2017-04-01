@@ -1,5 +1,7 @@
 package com.hjf.core.util;
 
+import java.util.UUID;
+
 import org.apache.log4j.Logger;
 import org.jxjz.common.util.secret.DesUtil;
 import org.jxjz.framework.util.ConfigUtil;
@@ -20,7 +22,7 @@ public class CustomerUtil {
 	 */
 	public static  void createToken(Customer  c) {
 		try {
-			String token=DesUtil.encrypt(c.getTelephone()+"-"+c.getCustomerId(), ConfigUtil.sys_secKey);
+			String token=DesUtil.encrypt(c.getTelephone()+"-"+c.getCustomerId()+"-"+UUID.randomUUID(), ConfigUtil.sys_secKey);
 			c.setUserToken(token);
 		} catch (Exception e) {
 			log.error("创建登录账户token  失败"+e.getMessage());
