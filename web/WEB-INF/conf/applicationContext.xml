@@ -3,10 +3,10 @@
 <beans>
 	<import resource="ApplicationContext_Framework.xml" />
     <import resource="ApplicationContext_SpringMVC.xml" />
-
+ 	<import resource="ApplicationContext_Cache.xml" />
      <import resource="ApplicationContext_Service.xml" />
     <import resource="ApplicationContext_Scheduledtask.xml" />
-<!--     <import resource="ApplicationContext_Cache.xml" />
+<!--    
 	<import resource="ApplicationContext_Jms.xml" />
     
  -->

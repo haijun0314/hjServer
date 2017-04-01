@@ -24,6 +24,9 @@ public class SessionUtil {
 		// 生产模式：保存在redis中
 		Map<String, Serializable> map = null;
 		if (!ConfigUtil.isSessionLocal()) {
+			
+			
+			
 			return map;
 		} else {
 			// 开发模式：保存在本地session中
