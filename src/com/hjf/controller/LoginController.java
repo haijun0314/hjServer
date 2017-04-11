@@ -42,7 +42,7 @@ public class LoginController extends BaseAction{
 			respMsgObj(response, r);
 		} catch (Exception e) {
 			log.error("【用户登录】...发生异常");
-			errorMsg(response);
+			errorMsg(response,e);
 		}
 	}	
 	 

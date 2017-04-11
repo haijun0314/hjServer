@@ -57,7 +57,7 @@ public class BaseIbatisDAO {
 	public int   delete(Object o ,String sqlId)  {
 		 
 		try {
-			return sqlSessionTemplate.delete(this.getNamespace()+sqlId, o);
+			return sqlSessionTemplate.delete(this.getNamespace()+"."+sqlId, o);
 		} catch (Exception e) {
 			log.error("执行delete方法发生异常信息.....sqlId="+sqlId+e.getMessage());
 			e.printStackTrace();
@@ -159,7 +159,7 @@ public class BaseIbatisDAO {
 	 */
 	public int  save(Object bean,String sql)  {
 		try {
-			sqlSessionTemplate.insert(this.getNamespace()+sql, bean);
+			sqlSessionTemplate.insert(this.getNamespace()+"."+sql, bean);
 		} catch (Exception e) {
 			log.error("执行save方法发生异常信息....sqlId="+sql+e.getMessage());
 			 return -1;
@@ -185,7 +185,7 @@ public class BaseIbatisDAO {
 	 */
 	public int update(BaseModel bean,String sqlId)   {
 		try {
-			return sqlSessionTemplate.update(this.getNamespace()+sqlId, bean);	
+			return sqlSessionTemplate.update(this.getNamespace()+"."+sqlId, bean);	
 		} catch (Exception e) {
 			log.error("执行update方法发生异常信息....sqlId="+sqlId+e.getMessage());
 			e.getStackTrace();
@@ -244,13 +244,13 @@ public class BaseIbatisDAO {
 	 * 根据ID查询
 	 */
 	public Map getById(Serializable id,String sql)  {
-		return (Map) sqlSessionTemplate.selectOne(this.getNamespace()+sql, id);
+		return (Map) sqlSessionTemplate.selectOne(this.getNamespace()+"."+sql, id);
 	}
 	/**
 	 * 根据ID查询
 	 */
 	public Object getObjById(Serializable id,String sql) {
-		return sqlSessionTemplate.selectOne(this.getNamespace()+sql, id);
+		return sqlSessionTemplate.selectOne(this.getNamespace()+"."+sql, id);
 	}	
 	/**
 	 * 根据id查找对象， 
@@ -280,7 +280,7 @@ public class BaseIbatisDAO {
 	 */
 	public List   queryList(String sqlId,Query query){
 		try {
-			return this.sqlSessionTemplate.selectList(this.getNamespace()+sqlId, query);
+			return this.sqlSessionTemplate.selectList(this.getNamespace()+"."+sqlId, query);
 		} catch (Exception e) {
 			log.error("执行queryList方法发生异常信息....sqlId="+sqlId+e.getMessage());
 			 e.getMessage();
@@ -293,7 +293,7 @@ public class BaseIbatisDAO {
 	 * @param query 查询条件
 	 */
 	public List   queryList(String sqlId,Object o){
-		return this.sqlSessionTemplate.selectList(this.getNamespace()+sqlId, o);
+		return this.sqlSessionTemplate.selectList(this.getNamespace()+"."+sqlId, o);
 	}	
 	
 	/**
@@ -321,7 +321,7 @@ public class BaseIbatisDAO {
 	 * 分页查询 pm存放分页参数和查询条件
 	 */
 	public PageBean queryPageList(PageBean pm,String  sqlId) {
-		List datas=this.sqlSessionTemplate.selectList(this.getNamespace()+sqlId, pm);
+		List datas=this.sqlSessionTemplate.selectList(this.getNamespace()+"."+sqlId, pm);
 		pm.setDatas(datas);
 		return pm;	
 	}		
