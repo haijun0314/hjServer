@@ -21,7 +21,7 @@ public class CustomerDAO extends BaseIbatisDAO{
 	 *【重设账户登录密码】
 	 */
 	public int resetPassword( Customer c){
-		return update(c,"Customer.resetPassword");
+		return update(c,"resetPassword");
 	}	
 	
 	/**

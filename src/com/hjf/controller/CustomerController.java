@@ -34,12 +34,6 @@ public class CustomerController extends BaseAction{
 			log.info("【查询自己账户信息】...");
 			BaseReqBean    		q =new BaseReqBean();
 			CustomerRespBean    r =new CustomerRespBean();
-			boolean check        =q.checkToken(request);
-			if (!check) {
-				r.fail(CodeUtil.e_9999);
-				respMsgObj(response, r);
-				return;	
-			}
 			r=customerService.getMyInfo(q, r);
 			respMsgObj(response, r);
 		} catch (Exception e) {
@@ -80,12 +74,6 @@ public class CustomerController extends BaseAction{
 		try {
 			BaseReqBean    		q =new BaseReqBean();
 			CustomerRespBean    r =new CustomerRespBean();
-			boolean check        =q.checkCustomerId(request);
-			if (!check) {
-				r.fail(CodeUtil.e_9999);
-				respMsgObj(response, r);
-				return;	
-			}
 			r=customerService.getMyInfo(q, r);
 			respMsgObj(response, r);
 		} catch (Exception e) {

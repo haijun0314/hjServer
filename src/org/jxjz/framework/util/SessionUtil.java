@@ -20,6 +20,7 @@ import com.hjf.entity.Customer;
  */
 public class SessionUtil {
 	public static RedisCacheUtil  rc=new RedisCacheUtil();
+	public  static int sessionValidTime=1800;//session  有效期单位 秒
 	/**
 	 *  获取Session
 	 *  name 如果是本地session    表示固定值session_login_user
@@ -63,7 +64,7 @@ public class SessionUtil {
 	public static synchronized void setSession(String name, Customer obj){
 		// 生产模式：保存在redis中
 		if (!ConfigUtil.isSessionLocal()) {
-			 rc.save(KeysUtil.getSession_login_User(obj.getTelephone()),1800, obj);
+			 rc.save(KeysUtil.getSession_login_User(obj.getTelephone()),sessionValidTime, obj.getUserToken());
 		} else {
 			// 开发模式：保存在本地session中
 			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -72,6 +73,15 @@ public class SessionUtil {
 		}
 	}
 
+	/**
+	 * 设置Session
+	 */
+	public static synchronized void continueSession(String telephone, String token){
+		 rc.save(KeysUtil.getSession_login_User(telephone),sessionValidTime,token);
+	}
+	
+	
+	
 	/**
 	 * 清理session
 	 */

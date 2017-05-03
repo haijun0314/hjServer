@@ -42,10 +42,6 @@ public class NoteReqBean extends BaseReqBean {
 	public boolean checkAddNoteParams(HttpServletRequest request) {
 		String title      =request.getParameter("title");
 		String content    =request.getParameter("content");
-		if (!checkToken(request)) {
-			return false;
-		}
-		
 		if (StringUtils.isBlank(title)) {
 			log.error("【添加笔记】...参数检测  缺失参数title");
 			return false;

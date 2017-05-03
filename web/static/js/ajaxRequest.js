@@ -54,11 +54,14 @@ var AjaxUtils = {
 	loadData: function(url, data, callback) {
 		AjaxUtils.loadding(1);
 		$.post(url, '', function (respData) {
-			alert(JSOn.stringify(respData));
+			 
 			AjaxUtils.loadding(0);
 	        if (respData.code == "0000") {
 	        	callback(respData);
-	        } else {
+	        } else if(respData.code == "1010"){
+	        	window.location.href="login.html";
+	        	
+	        }  else {
 	        	 $.toast(respData.msg);	 
 	        }
 	    });

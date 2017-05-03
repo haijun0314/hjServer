@@ -30,6 +30,17 @@ public class BaseAction {
 		ResponseUtils.renderJson(response,jsonStr);
 	}	
 	
+	/**
+	 * 系统错误返回
+	 */
+	public void   errorMsg(HttpServletResponse response,Exception e){
+		log.error("系统错误..."+e.getMessage());
+		log.error("系统错误..."+e.getStackTrace());
+		BaseRespBean brb=new BaseRespBean();
+		brb.fail(CodeUtil.error);
+		String jsonStr=JsonUtil.obj2Json(brb);
+		ResponseUtils.renderJson(response,jsonStr);
+	}	
 	
 	 
 	

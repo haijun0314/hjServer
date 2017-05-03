@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 
 import com.hjf.core.bean.BaseReqBean;
+import com.hjf.core.util.SecUtil;
 
 public class LoginReqBean extends BaseReqBean {
 	private String  telephone;//账户
@@ -26,7 +27,7 @@ public class LoginReqBean extends BaseReqBean {
 			return  false;
 		}
 		setTelephone(telephone); 		
-		setPassword(password);
+		setPassword(SecUtil.encrypt(password));
 		return true;
 	}
 

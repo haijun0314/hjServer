@@ -43,7 +43,7 @@ public class NoteServiceImpl extends BaseService  implements NoteService {
 	 * 【笔记详情】
 	 */
 	public NoteDetailRespBean detail(NoteReqBean q,NoteDetailRespBean r){
-		Map noteMap=(Map) noteDAO.getById(q.getNoteId(),"Note.noteDetail");
+		Map noteMap=(Map) noteDAO.getById(q.getNoteId(),"noteDetail");
 		if (noteMap==null||noteMap.isEmpty()) {
 			r.fail(CodeUtil.e_9996);
 			return r;
