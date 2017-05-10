@@ -7,7 +7,7 @@ import org.jxjz.base.model.BaseModel;
 /**
  * 功能说明:【账户信息】
  * 作    者：lihaijun
- * 创建日期：2014-11-21
+ * 创建日期：2017-05-10
  */
 public class Customer extends BaseModel implements java.io.Serializable {
     private String  userToken;					//账户token  免密码登录

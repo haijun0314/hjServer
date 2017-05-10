@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "Account">
+	
+
+	<!-- 通用查询  关注的企业-->
+	<select id="members" parameterType="PageBean" resultType="java.util.HashMap">
+		 select accountId,telephone,userType,stationId,agentId,linkUserName,linkTelephone,remark
+		 from account  
+		 where  delFlag=0  
+		<if test="@MyOgnl@isNotEmpty(params.fromSalerId)">
+			and fromSalerId=#{params.fromSalerId}
+		</if>
+		<if test="@MyOgnl@isNotEmpty(params.consumeStatus)">
+			and consumeStatus in #{params.consumeStatus}
+		</if>
+		order by  createdTime   asc
+		limit #startRow#,#pageSize#  
+	</select>
+
+
+
+
+
+
+	<!-- 查询id查询 -->
+	<select id="findById" parameterType="java.lang.Integer" resultType="Account" >
+	    select * from account  where    accountId=#{accountId} and  delFlag=0  
+	</select>	 
+	<select id="findByCardNO" parameterType="java.lang.String" resultType="Account" >
+	    select * from account  where    cardNO=#{cardNO} and  delFlag=0  
+	</select>	
+	
+	<!-- 用户密码登录   -->
+	<select id="login" parameterType="Account" resultType="Account">
+		select * from account where  telephone=#{telephone}  and password=#{password}  and   userType=#{userType}   and  delFlag=0   
+	</select>	
+	<!-- 用户密码登录   -->
+	<select id="findByTelephone" parameterType="java.lang.String" resultType="Account">
+		select * from account where  telephone=#{telephone}   and  delFlag=0  
+	</select>	
+	<!-- 用户密码登录   -->
+	<select id="findBySessionId" parameterType="java.lang.String" resultType="Account">
+		select * from account where  sessionId=#{sessionId}   and  delFlag=0  
+	</select>
+	<!-- 增加 -->
+	<insert id="insertWithId" parameterType="Account">
+		 insert into account (accountId,telephone,password,userType,stationId,agentId,cardBankAddress,cardBank,cardNOBank,linkUserName,linkTelephone,createdTime,registTime,status,
+		 			cityCode,imei,imsi)
+		 values(#{accountId},#{telephone},#{password},#{userType},#{stationId},#{agentId},#{cardBankAddress},#{cardBank},#{cardNOBank}#{linkUserName},#{linkTelephone},#{createdTime},#{registTime},#{status},
+		 			#{cityCode},#{imei},#{imsi})
+	    <selectKey resultType="int" keyProperty="accountId" >
+            SELECT @@IDENTITY AS accountId
+        </selectKey> 
+	</insert>
+  	 
+	<!-- 更新账户 -->
+	<update id="updateById" parameterType="Account" >
+	   update account 
+  	   	   <trim prefix="set"  suffixOverrides="," >
+	  	   	 <if test="@MyOgnl@isNotEmpty(linkTelephone)">
+	   		 	linkTelephone=#{linkTelephone},
+	   		 </if>
+	   		  <if test="@MyOgnl@isNotEmpty(linkUserName)">
+	   		 	linkUserName=#{linkUserName},
+	   		 </if>
+	  	   	 <if test="@MyOgnl@isNotEmpty(addressDoor)">
+	   		 	addressDoor=#{addressDoor},
+	   		 </if>
+	   		  <if test="@MyOgnl@isNotEmpty(addressStreet)">
+	   		 	addressStreet=#{addressStreet},
+	   		 </if>
+	  	   	 <if test="@MyOgnl@isNotEmpty(remark)">
+	   		 	remark=#{remark},
+	   		 </if>
+	   		  <if test="@MyOgnl@isNotEmpty(stationId)">
+	   		 	stationId=#{stationId},
+	   		 </if>	
+	   		  <if test="@MyOgnl@isNotEmpty(delFlag)">
+	   		 	delFlag=#{delFlag},
+	   		 </if>	
+	   		 
+	   </trim>
+	   where accountId = #accountId#
+	</update> 
+<!-- 更新sessionId -->
+	<update id="updateForLogin" parameterType="Account" >
+	   update account 
+	   	<trim prefix="set"  suffixOverrides="," >
+	   		 <if test="@MyOgnl@isNotEmpty(sessionId)">
+	   		 	 sessionId=#{sessionId},
+	   		</if>
+	   		 <if test="@MyOgnl@isNotEmpty(osType)">
+	   		 	 osType=#{osType}, 
+	   		 </if>
+	   		 <if test="@MyOgnl@isNotEmpty(updatedTime)">
+	   		 	 updatedTime=#{updatedTime}, 
+	   		</if>
+	   </trim>
+	   where accountId = #{accountId}
+	</update>	
+	
+	
+	
+	
+</mapper>
