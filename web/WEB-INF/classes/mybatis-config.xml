@@ -31,7 +31,7 @@
 	-->
 	<mappers>
 	 
-		 <mapper resource="com/hjf/sqlmap/customer_sqlMap.xml" />
+		 <mapper resource="com/hjf/sqlmap/account_sqlMap.xml" />
 		 <mapper resource="com/hjf/sqlmap/note_sqlMap.xml" />
 		 <mapper resource="com/hjf/sqlmap/sys_log_client_sqlMap.xml" />
 	     
