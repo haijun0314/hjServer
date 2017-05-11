@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hjf.core.bean.BaseReqBean;
 import com.hjf.core.bean.BaseRespBean;
-import com.hjf.core.bean.reqBean.CustomerReqBean;
-import com.hjf.core.bean.respBean.CustomerRespBean;
+import com.hjf.core.bean.reqBean.AccountReqBean;
+import com.hjf.core.bean.respBean.AccountRespBean;
 import com.hjf.core.util.CodeUtil;
 import com.hjf.service.AccountService;
  
@@ -31,8 +31,8 @@ public class AccountController extends BaseAction{
 		try {
 			log.info("【查询自己账户信息】...");
 			BaseReqBean    		q =new BaseReqBean();
-			CustomerRespBean    r =new CustomerRespBean();
-			r=accountService.getMyInfo(q, r);
+			AccountRespBean    r =new AccountRespBean();
+			r=accountService.accountInfo(q, r);
 			respMsgObj(response, r);
 		} catch (Exception e) {
 			log.error("【查询自己账户信息】...发生异常");
@@ -45,18 +45,18 @@ public class AccountController extends BaseAction{
 	/**
 	 * 【更新自己账户信息】
 	 */
-	@RequestMapping(params = "updateMyInfo")   
-	public void updateMyInfo(HttpServletRequest request,HttpServletResponse response) {
+	@RequestMapping(params = "update")   
+	public void update(HttpServletRequest request,HttpServletResponse response) {
 		try {
-			CustomerReqBean    	q =new CustomerReqBean();
+			AccountReqBean    	q =new AccountReqBean();
 			BaseRespBean    	r =new BaseRespBean();
-			boolean check        =q.checkUpdateParams(request);
+			boolean check        =q.checkParams(request);
 			if (!check) {
 				r.fail(CodeUtil.e_9999);
 				respMsgObj(response, r);
 				return;	
 			}
-			r=accountService.updateMyInfo(q, r);
+			accountService.update(q);
 			respMsgObj(response, r);
 		} catch (Exception e) {
 			log.error("【查询自己账户信息】...发生异常");
@@ -71,8 +71,8 @@ public class AccountController extends BaseAction{
 	public void customerInfo(HttpServletRequest request,HttpServletResponse response) {
 		try {
 			BaseReqBean    		q =new BaseReqBean();
-			CustomerRespBean    r =new CustomerRespBean();
-			r=accountService.getMyInfo(q, r);
+			AccountRespBean    r =new AccountRespBean();
+			r=accountService.accountInfo(q, r);
 			respMsgObj(response, r);
 		} catch (Exception e) {
 			log.error("【查看他人账户信息】...发生异常");

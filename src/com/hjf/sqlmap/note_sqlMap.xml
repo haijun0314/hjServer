@@ -7,7 +7,7 @@
 	<select id="noteDetail" parameterType="java.lang.Integer" resultType="java.util.HashMap" >
 	    select  *
 	    from note  n
-	    left  join  customer  c on n.customerId=c.customerId
+	    left  join  account  c on n.accountId=c.accountId
 	    where    n.noteId=#{noteId}
 	</select>
 	<!-- 查询id查询 -->
@@ -17,13 +17,13 @@
 	 
   <!-- 分页查询-->
   <select id="queryPagelist" parameterType="org.jxjz.base.model.PageBean" resultType="java.util.HashMap" >
-    	select noteId,n.customerId,content,title,photos,  noteType,n.createdTime ,praiseCount,commentCount,
-    	c.customerName,c.headPic
+    	select noteId,n.accountId,content,title,photos,  noteType,n.createdTime ,praiseCount,commentCount,
+    	c.accountName,c.headPic
 	    from note n
-	    left  join  customer  c on n.customerId=c.customerId
+	    left  join  account  c on n.accountId=c.accountId
 	    where  1=1  
-  	   	 <if test="@MyOgnl@isNotEmpty(params.customerId)">
-   		 	n.customerId=#{params.customerId}
+  	   	 <if test="@MyOgnl@isNotEmpty(params.accountId)">
+   		 	n.accountId=#{params.accountId}
    		 </if>
    		 order  by   createdTime  desc
 	    limit #{startRow},#{pageSize}
@@ -32,8 +32,8 @@
 	
 	<!-- 增加 -->
 	<insert id="insertWithId" parameterType="Note">
-		 insert into note (noteId,customerId,createdTime,content,title,photos,babyId)
-		 values(#{noteId},#{customerId},#{createdTime},#{content},#{title},#{photos},#{babyId})
+		 insert into note (noteId,accountId,createdTime,content,title,photos,babyId)
+		 values(#{noteId},#{accountId},#{createdTime},#{content},#{title},#{photos},#{babyId})
 	    <selectKey resultType="int" keyProperty="noteId" >
             SELECT @@IDENTITY AS noteId
         </selectKey> 

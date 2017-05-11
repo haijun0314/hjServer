@@ -25,7 +25,6 @@ import com.hjf.service.NoteService;
 @RequestMapping("/note") 
 public class NoteController extends BaseAction{
 	@Resource NoteService    noteService;
-	private Logger log = Logger.getLogger("h");
 	
 	/**
 	 * 【添加笔记】
@@ -83,7 +82,7 @@ public class NoteController extends BaseAction{
 			BaseRespBean   r=new BaseRespBean();
 			PageBean      pb=new PageBean(request);
 			BaseReqBean q=new BaseReqBean();
-			pb.append("customerId", q.getCustomerId());
+			pb.append("accountId", q.getAccountId());
 			r=noteService.noteList(pb,r);
 			super.respMsgObj(response, r);
 		} catch (Exception e) {

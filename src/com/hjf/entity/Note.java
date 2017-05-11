@@ -9,7 +9,7 @@ import org.jxjz.base.model.BaseModel;
  * createTime   2014-11-21
  */
 public class Note extends BaseModel implements Serializable  {
-	private Integer customerId;	//用户编号
+	private Integer accountId;	//用户编号
 	private Integer noteId;		//笔记编号
 	private String  content;	//笔记内容
 	private String  title;		//标题
@@ -20,11 +20,12 @@ public class Note extends BaseModel implements Serializable  {
 	private Integer praiseCount;//点赞数量
 	
 	
-	public Integer getCustomerId() {
-		return customerId;
+	 
+	public Integer getAccountId() {
+		return accountId;
 	}
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
 	}
 	public Integer getNoteId() {
 		return noteId;

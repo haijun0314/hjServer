@@ -11,73 +11,74 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hjf.core.bean.BaseReqBean;
-import com.hjf.core.bean.BaseRespBean;
-import com.hjf.core.bean.reqBean.CustomerReqBean;
-import com.hjf.core.bean.respBean.CustomerRespBean;
+import com.hjf.core.bean.reqBean.AccountReqBean;
+import com.hjf.core.bean.respBean.AccountRespBean;
 import com.hjf.core.util.CodeUtil;
-import com.hjf.dao.CustomerDAO;
-import com.hjf.entity.Customer;
-import com.hjf.service.CustomerService;
+import com.hjf.dao.AccountDAO;
+import com.hjf.entity.Account;
+import com.hjf.service.AccountService;
 @Service
 @Transactional 
-public class AccountServiceImpl   extends BaseService implements CustomerService {
-	@Resource CustomerDAO customerDAO;
+public class AccountServiceImpl   extends BaseService implements AccountService {
+	@Resource AccountDAO accountDAO;
 	
-	/**
-	 * 【查询我的账户信息】
-	 */
-	public CustomerRespBean getMyInfo(BaseReqBean q,CustomerRespBean r){
-		try {
-			Customer map =customerDAO.getCustomerById(q.getCustomerId());
-			copyProperties(r, map);
-		} catch (Exception e) {
-			r.fail(CodeUtil.e_9996);
-			log.error("【查询我的账户信息】..."+q.getCustomerId()+"发生异常...");
-			e.printStackTrace();
-			return r;
-		}
-		r.success();
-		return r;
-	}
-	
+ 
 	/**
 	 * 【更新自己账户信息】
 	 */
-	public BaseRespBean updateMyInfo(CustomerReqBean q,BaseRespBean r){
+	public void update(AccountReqBean q){
 		try {
-			Customer c=new Customer();
+			Account c=new Account();
 			copyProperties(c, q);
-			int ret=customerDAO.updateById(c);
+			int ret=accountDAO.updateById(c);
 			if (ret<0) {
-				r.fail(CodeUtil.e_9998);
-				log.error("【更新自己账户信息】..."+q.getCustomerId()+"发生异常...");
-				return r;
+				log.error("【更新自己账户信息】..."+q.getAccountId()+"发生异常...");
 			}
 		} catch (Exception e) {
-			r.fail(CodeUtil.e_9996);
-			log.error("【更新自己账户信息】..."+q.getCustomerId()+"发生异常...");
+			log.error("【更新自己账户信息】..."+q.getAccountId()+"发生异常...");
 			e.printStackTrace();
-			return r;
 		}
-		r.success();
-		return r;
 	}
 	
 	/**
 	 * 【查看他人账户信息】
 	 */
-	public CustomerRespBean customerInfo(BaseReqBean q,CustomerRespBean r){
+	public AccountRespBean accountInfo(BaseReqBean q,AccountRespBean r){
 		try {
-			Customer map =customerDAO.getCustomerById(q.getCustomerId());
+			Account map =accountDAO.getAccountById(q.getAccountId());
 			copyProperties(r, map);
 		} catch (Exception e) {
 			r.fail(CodeUtil.e_9996);
-			log.error("【查看他人账户信息】..."+q.getCustomerId()+"发生异常...");
+			log.error("【查看他人账户信息】..."+q.getAccountId()+"发生异常...");
 			e.printStackTrace();
 			return r;
 		}
 		r.success();
 		return r;
 	}	
-
+	/**
+	 * 【查看账户信息】
+	 */
+	public Account getAccount(Integer accountId)	{
+		Account account =accountDAO.getAccountById(accountId);
+		return account;
+	}
+	
+	
+	/**
+	 * 【查看账户信息】
+	 */
+	public Account getAccountByTelephone(String telephone)	{
+		Account account =(Account) accountDAO.getObjById(telephone, "findByTelephone");
+		return account;
+	}
+	
+	
+	/**
+	 * 【添加账户】
+	 */
+	public int addAccount(Account a)	{
+		int id=accountDAO.saveWithReturnId(a);
+		return id;
+	}	
 }

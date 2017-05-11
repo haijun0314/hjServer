@@ -3,7 +3,7 @@ package com.hjf.core.bean.respBean;
 import com.hjf.core.bean.BaseRespBean;
 
 public class RegisterRespBean extends BaseRespBean {
-	private Integer customerId;					//用户编号
+	private Integer accountId;					//用户编号
     private String  userToken;//账户token  免密码登录
 	private Integer userId; //用户编号
 	private String  userName;//用户名
@@ -60,12 +60,13 @@ public class RegisterRespBean extends BaseRespBean {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Integer getCustomerId() {
-		return customerId;
+	public Integer getAccountId() {
+		return accountId;
 	}
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
 	}
+	 
 	 
 
 

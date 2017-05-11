@@ -21,7 +21,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.hjf.core.bean.BaseRespBean;
 import com.hjf.core.util.CodeUtil;
-import com.hjf.entity.Customer;
+import com.hjf.entity.Account;
 
 public class MyHandlerInterceptor extends HandlerInterceptorAdapter {
 	Logger log=LogUtil.getLogger(); 
@@ -46,7 +46,7 @@ public class MyHandlerInterceptor extends HandlerInterceptorAdapter {
 		ck=DesUtil.decrypt(ck, ConfigUtil.sys_secKey);
 		if (ConfigUtil.isSessionLocal()) {
 			log.info("【权限session拦截】....session本地存储 ck="+ck);
-			Customer c=(Customer) SessionUtil.getLocalSession(ConfigUtil.Session_Login_User);
+			Account c=(Account) SessionUtil.getLocalSession(ConfigUtil.Session_Login_User);
 			if(c==null){
 				invalidSession(response);
 				return false;

@@ -8,7 +8,7 @@
 	 	 <typeAlias alias="myOngl" type="org.jxjz.base.mybatis.Ognl" />
 		 <typeAlias alias="Query" type="org.jxjz.base.mybatis.Query" />
 		 <typeAlias alias="PageBean" type="org.jxjz.base.model.PageBean" />
-		 <typeAlias alias="Customer" type="com.hjf.entity.Customer" />
+		 <typeAlias alias="Account" type="com.hjf.entity.Account" />
 		 <typeAlias alias="Note" type="com.hjf.entity.Note" />
 		 <typeAlias alias="SysLogClient" type="com.hjf.entity.SysLogClient" />
 		 

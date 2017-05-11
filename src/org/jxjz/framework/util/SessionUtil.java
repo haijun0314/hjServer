@@ -13,7 +13,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.hjf.core.util.KeysUtil;
-import com.hjf.entity.Customer;
+import com.hjf.entity.Account;
 
 /**
  * 
@@ -61,7 +61,7 @@ public class SessionUtil {
 	/**
 	 * 设置Session
 	 */
-	public static synchronized void setSession(String name, Customer obj){
+	public static synchronized void setSession(String name, Account obj){
 		// 生产模式：保存在redis中
 		if (!ConfigUtil.isSessionLocal()) {
 			 rc.save(KeysUtil.getSession_login_User(obj.getTelephone()),sessionValidTime, obj.getUserToken());

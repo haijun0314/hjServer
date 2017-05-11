@@ -1,16 +1,11 @@
 package com.hjf.service.impl;
 
-/**
- * 【笔记管理】
- */
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.jxjz.base.model.PageBean;
-import org.jxjz.common.util.TimeUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +28,7 @@ public class NoteServiceImpl extends BaseService  implements NoteService {
 		Note note=new Note();
 		note.setContent(q.getContent());
 		note.setTitle(q.getTitle());
-		note.setCustomerId(q.getCustomerId());
+		note.setAccountId(q.getAccountId());;
 		noteDAO.saveWithReturnId(note);
 		r.success();		
 		return  r;

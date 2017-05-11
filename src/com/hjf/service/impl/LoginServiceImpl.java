@@ -13,30 +13,30 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hjf.core.bean.reqBean.LoginReqBean;
 import com.hjf.core.bean.respBean.LoginRespBean;
+import com.hjf.core.util.AccountUtil;
 import com.hjf.core.util.CodeUtil;
-import com.hjf.core.util.CustomerUtil;
-import com.hjf.dao.CustomerDAO;
-import com.hjf.entity.Customer;
+import com.hjf.dao.AccountDAO;
+import com.hjf.entity.Account;
 import com.hjf.service.LoginService;
 @Service
 @Transactional 
 public class LoginServiceImpl extends BaseService  implements LoginService {
-	@Resource CustomerDAO customerDAO;
+	@Resource AccountDAO accountDAO;
 	/**
 	 * 【用户登录】
 	 */
 	public LoginRespBean login(LoginReqBean q,LoginRespBean     r ){
 		log.info("登录操作开始....账户"+q.getTelephone());
-		Customer  lo=new Customer();
+		Account  lo=new Account();
 		lo.setPassword(q.getPassword());
 		lo.setTelephone(q.getTelephone());
-		Customer c =(Customer) customerDAO.getObjById(lo, "login");
+		Account c =(Account) accountDAO.getObjById(lo, "login");
 		if (c==null) {
 			log.error("【用户登录】...登录失败....没有查询到该账户信息");
 			r.fail(CodeUtil.e_1003);
 			return r;
 		}
-		CustomerUtil.createToken(c);
+		AccountUtil.createToken(c);
 		SessionUtil.setSession(ConfigUtil.Session_Login_User, c);
 		CookieUtil.setCookie(ConfigUtil.Cookie_Login_User, c.getUserToken());
 		copyProperties(r, c);

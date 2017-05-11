@@ -11,7 +11,7 @@ import org.jxjz.framework.util.LogUtil;
  */
 public class BaseReqBean {
 	private String   userToken; 
-	private Integer  customerId;		
+	private Integer  accountId;		
 	private String   versionNO;//版本编号
 	private String   telephone;//账户
 	public Logger   log = LogUtil.getLogger(); 
@@ -27,17 +27,17 @@ public class BaseReqBean {
 
 	 
 
-	public Integer getCustomerId() {
-		return customerId;
+ 
+
+
+
+	public Integer getAccountId() {
+		return accountId;
 	}
 
-
-
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
 	}
-
-
 
 	public String getVersionNO() {
 		return versionNO;

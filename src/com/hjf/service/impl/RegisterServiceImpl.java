@@ -13,18 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hjf.core.bean.reqBean.RegisterReqBean;
 import com.hjf.core.bean.respBean.RegisterRespBean;
+import com.hjf.core.util.AccountUtil;
 import com.hjf.core.util.CodeUtil;
-import com.hjf.core.util.CustomerUtil;
-import com.hjf.dao.CustomerDAO;
-import com.hjf.entity.Customer;
-import com.hjf.service.CustomerService;
+import com.hjf.entity.Account;
+import com.hjf.service.AccountService;
 import com.hjf.service.RegisterService;
 import com.hjf.service.SmsService;
 @Service
 @Transactional 
 public class RegisterServiceImpl extends BaseService  implements RegisterService {
-	@Resource  CustomerService   	customerService;
-	@Resource  CustomerDAO  	    customerDAO;
+	@Resource  AccountService   	accountService;
 	@Resource  SmsService 		    smsService;
  
 	/**
@@ -43,7 +41,7 @@ public class RegisterServiceImpl extends BaseService  implements RegisterService
 			return r;
 		}
 		//检查是否已经注册过
-		Customer c=(Customer) customerDAO.getObjById(q.getTelephone(), "findByTelephone");
+		Account c=accountService.getAccountByTelephone(q.getTelephone());
 		if (c!=null) {
 			r.fail(CodeUtil.e_1007);
 			log.error("【账户注册】"+q.getTelephone()+" 该账户已经注册   不能重复注册");
@@ -52,18 +50,18 @@ public class RegisterServiceImpl extends BaseService  implements RegisterService
 	
 		try {
 			//创建账户
-			Customer cst=CustomerUtil.createCustomer(q);
-			int id=customerDAO.saveWithReturnId(cst);
-			if (id<0) {
+			Account a=AccountUtil.createAccount(q);
+			int accountId=accountService.addAccount(a);
+			if (accountId<0) {
 				r.fail(CodeUtil.e_1005);
 				log.info("【账户注册】失败"+q.getTelephone());
 				return r;
 			}
-			cst.setCustomerId(id);
-			r.setCustomerId(id);
-			CustomerUtil.createToken(cst);
-			SessionUtil.setSession(ConfigUtil.Session_Login_User, cst);
-			CookieUtil.setCookie(ConfigUtil.Cookie_Login_User, cst.getUserToken());
+			a.setAccountId(accountId);;
+			r.setAccountId(accountId);
+			AccountUtil.createToken(a);
+			SessionUtil.setSession(ConfigUtil.Session_Login_User, a);
+			CookieUtil.setCookie(ConfigUtil.Cookie_Login_User, a.getUserToken());
 		} catch (Exception e) {
 			log.error("【账户注册】...发生异常..."+e.getMessage());
 			e.getMessage();
